@@ -15,14 +15,22 @@ public class UsuarioResource {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/")
-    public String getUsuarios(){
-        return "teste de usuarios";
+    @GetMapping("{id}")
+    public  ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id){
+        Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+        return ResponseEntity.ok(usuarioService.converterUsuarioParaUsuarioDTO(usuario));
+    }
+    @GetMapping("/buscar")
+    public ResponseEntity<UsuarioDTO>buscarUsuarioPorEmail(@RequestParam String email){
+        UsuarioDTO usuario = usuarioService.buscarUsuarioPorEmail(email);
+        return ResponseEntity.ok(usuario);
     }
 
     @PostMapping("/")
     public ResponseEntity<UsuarioDTO>criarUsuario(@RequestBody UsuarioDTO usuarioDTO ){
         UsuarioDTO dto = usuarioService.salvarUsuario(usuarioDTO);
-        return ResponseEntity.ok(dto                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
+        return ResponseEntity.ok(dto);
+
+
     }
 }

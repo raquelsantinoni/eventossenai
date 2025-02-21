@@ -51,6 +51,18 @@ public class UsuarioService {
 
         return usuarioDTO;
     }
+
+    public Usuario buscarUsuarioPorId(Long id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Usuario nao encontrado"));
+    }
+    public  UsuarioDTO buscarUsuarioPorEmail(String email) {
+        return converterUsuarioParaUsuarioDTO(usuarioRepository.findByEmail(email)
+                .orElseThrow(() ->
+                new IllegalArgumentException("Usuario nao encontrado")));
+
+    }
 }
 
 
