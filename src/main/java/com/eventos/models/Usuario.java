@@ -1,9 +1,12 @@
 package com.eventos.models;
 
+import com.eventos.dtos.UsuarioDTO;
+import com.eventos.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,22 +30,33 @@ public class Usuario {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
-    private String perfil;
+    public List<Perfil> perfis;
 
-    @Column(name = "is_verificado")
-    private Boolean isVerificado;
+    private Boolean verificado;
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String email, String senha, String cpf, Date dataNascimento, String perfil, Boolean isVerificado) {
+    public Usuario(Long id, String nome, String email, String senha, String cpf, Date dataNascimento,
+                   List<Perfil> perfis, Boolean isVerificado) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.perfil = perfil;
-        this.isVerificado = isVerificado;
+        this.perfis = perfis;
+        this.verificado =verificado;
+    }
+
+    public Usuario(UsuarioDTO usuarioDTO) {
+        this.id = usuarioDTO.getId();
+        this.nome = usuarioDTO.getNome();
+        this.email = usuarioDTO.getEmail();
+        this.senha = usuarioDTO.getSenha();
+        this.cpf = usuarioDTO.getCpf();
+        this.dataNascimento = usuarioDTO.getDataNascimento();
+        this.perfis = usuarioDTO.getPerfis();
+        this.verificado = usuarioDTO.getVerificado();
     }
 
     public Long getId() {
@@ -93,20 +107,20 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getPerfil() {
-        return perfil;
+    public List<Perfil> getPerfil() {
+        return perfis;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPerfil(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 
     public Boolean getVerificado() {
-        return isVerificado;
+        return verificado;
     }
 
     public void setVerificado(Boolean verificado) {
-        isVerificado = verificado;
+        verificado = verificado;
     }
 
     @Override

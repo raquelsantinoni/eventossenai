@@ -1,8 +1,10 @@
 package com.eventos.dtos;
 
-import jakarta.persistence.Column;
+import com.eventos.enums.Perfil;
+import com.eventos.models.Usuario;
 
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
     private Long id;
@@ -11,8 +13,21 @@ public class UsuarioDTO {
     private String senha;
     private String cpf;
     private Date dataNascimento;
-    private String perfil;
-    private Boolean isVerificado;
+    private List <Perfil> perfis ;
+    private Boolean verificado;
+
+    public UsuarioDTO() {}
+
+    public UsuarioDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.senha = usuario.getSenha();
+        this.cpf = usuario.getCpf();
+        this.dataNascimento = usuario.getDataNascimento();
+        this.perfis = usuario.getPerfil();
+        this.verificado = usuario.getVerificado();
+    }
 
     public Long getId() {
         return id;
@@ -62,19 +77,19 @@ public class UsuarioDTO {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getPerfil() {
-        return perfil;
+    public List getPerfis() {
+        return perfis;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPerfil(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 
     public Boolean getVerificado() {
-        return isVerificado;
+        return verificado;
     }
 
     public void setVerificado(Boolean verificado) {
-        isVerificado = verificado;
+        this.verificado = verificado;
     }
 }
