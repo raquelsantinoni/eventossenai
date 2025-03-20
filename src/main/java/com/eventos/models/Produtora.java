@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cidades")
+@Table(name = "produtoras")
 public class Produtora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Produtora {
 
     private String nome;
 
-    @Column(name = "cpf_cnpj , unique = true")
+    @Column(name = "cpf_cnpj" , unique = true)
     private String cpfCnpj;
 
     public Produtora(){}
